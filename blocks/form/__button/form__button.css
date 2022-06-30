@@ -6,7 +6,9 @@
   border-radius: 2px;
   color: #ffffff;
   margin-top: 18px;
-  border-radius: 2px;
+  margin-bottom: 37px;
+  font-size: 18px;
+  line-height: 22px;
 }
 
 .form__button:hover {
@@ -17,5 +19,8 @@
   .form__button {
     width: 238px;
     height: 46px;
+    font-size: 14px;
+    line-height: 17px;
+    margin-bottom: 25px;
   }
 }

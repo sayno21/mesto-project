@@ -1,6 +1,6 @@
 .profile__edit-button {
   cursor: pointer;
-  background-color: #000000;
+  background-color: transparent;
   border: 1px solid #FFFFFF;
   background-image: url(../../../image/pencil.svg);
   background-repeat: no-repeat;

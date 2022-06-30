@@ -1,0 +1,18 @@
+.element {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  max-width: max-content;
+
+}
+
+@media screen and (max-width: 425px) {
+  .element {
+    min-width: 282px;
+  }
+}
+
+
+

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Mesto">
+  <meta name="keywords" content="">
+  <meta name="author" content="Руслан Щербаков">
+  <link rel="stylesheet" href="./pages/index.css">
+  <title>Mesto</title>
+</head>
+<body class="body">
+  <div class="page">
+    <header class="header">
+      <img src="./image/lodo-mesto.svg" alt="Логотип Место" class="header__logo">
+    </header>
+    <main class="content">
+      <section class="profile">
+        <img src="./image/kusto.png" alt="Аватар" class="profile__image">
+        <div class="profile__info">
+          <h1 class="profile__title">Жак-Ив Кусто</h1>
+          <form action="" method="post class="profile__edit-form"><button class="profile__edit-button"></button></form>
+          <p class="profile__subtitle">Исследователь океана</p>
+        </div>
+        <form action="" method="post" class="profile__add-form">
+          <button class="profile__add-button"></button>
+        </form>
+      </section>
+      <section class="elements">
+        <ul class="elements__container">
+          <li class="element">
+            <img src="./image/unsplashkarachaevsk.png" alt="Старинная крепость" class="element__image">
+            <div class="element__subtitle">
+              <p class="element__text">Карачаевск</p>
+              <a href="#" class="element__link"></a>
+            </div>
+          </li>
+          <li class="element">
+            <img src="./image/unsplashelbrus.png" alt="Горный пик на рассвете" class="element__image">
+            <div class="element__subtitle">
+              <p class="element__text">Гора Эльбрус</p>
+              <a href="#" class="element__link"></a>
+            </div>
+          </li>
+          <li class="element">
+            <img src="./image/unsplashdombai.png" alt="Гора посреди хвойного леса" class="element__image">
+            <div class="element__subtitle">
+              <p class="element__text">Домбай</p>
+              <a href="#" class="element__link"></a>
+            </div>
+          </li>
+          <li class="element">
+            <img src="./image/unsplashelbrus.png" alt="Горный пик на рассвете" class="element__image">
+            <div class="element__subtitle">
+              <p class="element__text">Гора Эльбрус</p>
+              <a href="#" class="element__link"></a>
+            </div>
+          </li>
+          <li class="element">
+            <img src="./image/unsplashdombai.png" alt="Гора посреди хвойного леса" class="element__image">
+            <div class="element__subtitle">
+              <p class="element__text">Домбай</p>
+              <a href="#" class="element__link"></a>
+            </div>
+          </li>
+          <li class="element">
+            <img src="./image/unsplashkarachaevsk.png" alt="Старинная крепость" class="element__image">
+            <div class="element__subtitle">
+              <p class="element__text">Карачаево-Черкессия</p>
+              <a href="#" class="element__link"></a>
+            </div>
+          </li>
+        </ul>
+      </section>
+      <section class="popup">
+        <div class="popup__container">
+          <form action="" method="post" class="form">
+            <h2 class="form__title">Редактировать профиль</h2>
+            <input type="text" class="form__text" name="firstname" value="Жак-Ив Кусто">
+            <input type="text" class="form__text" name="description" value="Исследователь океана">
+            <button type="submit" class="form__button">Сохранить</button></form>
+          </form>
+          <button class="popup__close-button"></button>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+      <p class="footer__copyrights">&copy; 2020 Mesto Russia</p>
+    </footer>
+  </div>
+</body>
+</html>

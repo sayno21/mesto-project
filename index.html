@@ -74,18 +74,18 @@
       </section>
       <div class="popup popup_type_profile">
         <div class="popup__container">
-          <form name="Profile-form" action="#" method="post" class="form">
+          <form name="Profile-form" action="submit" method="post" class="form form_type_profile">
             <h2 class="form__title">Редактировать профиль</h2>
-            <input type="text" class="form__text" name="firstname" value="Жак-Ив Кусто">
-            <input type="text" class="form__text" name="description" value="Исследователь океана">
-            <button type="submit" class="form__button" aria-label="Save-button">Сохранить</button>
+            <input type="text" class="form__text form__text_type_firstmane" name="firstname" value="Жак-Ив Кусто">
+            <input type="text" class="form__text form__text_type_description" name="description" value="Исследователь океана">
+            <button type="submit" class="form__button form__button-profile_type_submit" aria-label="Save-button">Сохранить</button>
           </form>
           <button class="popup__close-button close-button_profile" type="button" aria-label="Close-button"></button>
         </div>
       </div>
       <div class="popup popup_type_new-card">
         <div class="popup__container">
-          <form name="New-card-form" action="#" method="post" class="form">
+          <form name="New-card-form" action="#" method="post" class="form form_type_new-card">
             <h2 class="form__title">Новое место</h2>
             <input type="text" class="form__text" name="designation" placeholder="Название">
             <input type="url" class="form__text" name="image-link" placeholder="Ссылка на картинку">

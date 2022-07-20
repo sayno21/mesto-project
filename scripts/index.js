@@ -1,3 +1,4 @@
+// открытие и закрытие модальных окон
 const popupTypeProfile = document.querySelector('.popup_type_profile');
 const popupTypeNewcard = document.querySelector('.popup_type_new-card');
 const popupEditButton = document.querySelector('.profile__edit-button');
@@ -19,7 +20,7 @@ function popupNewcardClose () {popupTypeNewcard.classList.remove('popup_opened')
 popupCloseButtonNewcard.addEventListener('click', popupNewcardClose);
 
 
-
+//форма редактирования профиля
 const formTypeProfile = document.querySelector('.form_type_profile');
 const firstnameInput = formTypeProfile.querySelector('.form__text_type_firstmane');
 const descriptionInput = formTypeProfile.querySelector('.form__text_type_description');
@@ -36,7 +37,7 @@ function formSubmitHandler (evt) {
 }
 formTypeProfile.addEventListener('submit', formSubmitHandler);
 
-// попытка сделать злоебучие карточки
+// добавоение карточки
 const elementCard = document.querySelector('.element');
 const formTypeNewCard = document.querySelector('.form_type_new-card');
 const designationInput = formTypeNewCard.querySelector('.form__text_type_name');
@@ -57,5 +58,6 @@ function formSubmitAddHandler(evt) {
   const newCard = createCard (imageLinkInput.value, designationInput.value);
   elementCard.before(newCard);
   popupNewcardClose ();
-};
+}
+
 formTypeNewCard.addEventListener('submit', formSubmitAddHandler);

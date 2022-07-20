@@ -34,5 +34,28 @@ function formSubmitHandler (evt) {
   occupation.textContent = descriptionInput.value;
   popupProfileClose();
 }
-
 formTypeProfile.addEventListener('submit', formSubmitHandler);
+
+// попытка сделать злоебучие карточки
+const elementCard = document.querySelector('.element');
+const formTypeNewCard = document.querySelector('.form_type_new-card');
+const designationInput = formTypeNewCard.querySelector('.form__text_type_name');
+const imageLinkInput = formTypeNewCard.querySelector('.form__text_type_image-link');
+const templateElement = document.querySelector('.element-template');
+
+function createCard (imageLink, designation) {
+  const userCard = templateElement.content.cloneNode(true);
+  const elementImage = userCard.querySelector('.element__image');
+  elementImage.src = imageLink;
+  userCard.querySelector('.element__text').textContent = designation;
+  return userCard;
+
+}
+
+function formSubmitAddHandler(evt) {
+  evt.preventDefault();
+  const newCard = createCard (imageLinkInput.value, designationInput.value);
+  elementCard.before(newCard);
+  popupNewcardClose ();
+};
+formTypeNewCard.addEventListener('submit', formSubmitAddHandler);

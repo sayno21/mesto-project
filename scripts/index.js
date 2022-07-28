@@ -38,7 +38,7 @@ const initialCards = [
   },
   {
     name: 'Набережная',
-    link: 'http://photos.lifeisphoto.ru/45/0/451759.jpg'
+    link: 'http://rasfokus.ru/images/photos/medium/55a7a8e067e55120ee8f962547932a8c.jpg'
   },
   {
     name: 'Камчатка',

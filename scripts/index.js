@@ -1,63 +1,121 @@
-// открытие и закрытие модальных окон
+//---------------Открытие/Закрытие модальных окон---------------
 const popupTypeProfile = document.querySelector('.popup_type_profile');
 const popupTypeNewcard = document.querySelector('.popup_type_new-card');
-const popupEditButton = document.querySelector('.profile__edit-button');
-const popupAddButton = document.querySelector('.profile__add-button');
-const popupCloseButtonProfile = document.querySelector('.close-button_profile');
-const popupCloseButtonNewcard = document.querySelector('.close-button_new-card')
+const profileEditButton = document.querySelector('.profile__edit-button');
+const profileAddButton = document.querySelector('.profile__add-button');
+const popupTypeZoom = document.querySelector('.popup_type_zoom');
+const closeButtonProfile = document.querySelector('.close-button_profile');
+const closeButtonNewcard = document.querySelector('.close-button_new-card');
+const closeButtonZoom = document.querySelector('.popup__close-button_zoom-image');
+
+function openPopup(popup) {popup.classList.add('popup_opened')};
+profileEditButton.addEventListener('click', function() {openPopup(popupTypeProfile)});
+profileAddButton.addEventListener('click', function() {openPopup(popupTypeNewcard)});
+
+function closePopup(popup) {popup.classList.remove('popup_opened')};
+closeButtonProfile.addEventListener('click', function(){closePopup(popupTypeProfile)});
+closeButtonNewcard.addEventListener('click', function(){closePopup(popupTypeNewcard)});
+closeButtonZoom.addEventListener('click', function(){closePopup(popupTypeZoom)});
 
 
-function popupProfileOpen () {popupTypeProfile.classList.add('popup_opened')}
-popupEditButton.addEventListener('click', popupProfileOpen);
+//--------------------Готовый массив карточек-------------------
+const initialCards = [
+  {
+    name: 'Дворы центрального района Санкт-Петербурга',
+    link: 'https://avatars.mds.yandex.net/get-zen_doc/1671180/pub_5e6de84a4f80686f3cb6f394_5e6dec632a0aa97f0bf5074c/scale_1200'
+  },
+  {
+    name: 'Парадная',
+    link: 'https://sun9-23.userapi.com/xn6ZlCyTt_22GJ0rE-LzJXJ-tSWyd88t3vP2ww/z9prKXIdawc.jpg'
+  },
+  {
+    name: 'Вид с крыш',
+    link: 'https://i01.fotocdn.net/s129/464ab7c2080e10ca/public_pin_l/2917810206.jpg'
+  },
+  {
+    name: 'Двор-Колодец',
+    link: 'https://pro-dachnikov.com/uploads/posts/2021-10/1633327441_23-p-dom-stena-v-sankt-peterburge-vnutri-foto-26.jpg'
+  },
+  {
+    name: 'Набережная',
+    link: 'http://photos.lifeisphoto.ru/45/0/451759.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://travelask.ru/system/images/files/000/322/386/wysiwyg/fR0Kajg5gM0.jpg?1500040314'
+  }
+];
 
-function popupProfileClose () {popupTypeProfile.classList.remove('popup_opened')}
-popupCloseButtonProfile.addEventListener('click', popupProfileClose);
 
-function popupNewcardOpen () {popupTypeNewcard.classList.add('popup_opened')}
-popupAddButton.addEventListener('click', popupNewcardOpen);
-
-function popupNewcardClose () {popupTypeNewcard.classList.remove('popup_opened')}
-popupCloseButtonNewcard.addEventListener('click', popupNewcardClose);
-
-
-//форма редактирования профиля
+//----------------Редактирование профиля---------------
+const firstname = document.querySelector('.form__text_type_firstmane');
+const description = document.querySelector('.form__text_type_description');
+const profileTitle = document.querySelector('.profile__title');
+const profileSubtitle = document.querySelector('.profile__subtitle');
 const formTypeProfile = document.querySelector('.form_type_profile');
-const firstnameInput = formTypeProfile.querySelector('.form__text_type_firstmane');
-const descriptionInput = formTypeProfile.querySelector('.form__text_type_description');
 
 function formSubmitHandler (evt) {
   evt.preventDefault();
-  firstnameInput.getAttribute('value');
-  descriptionInput.getAttribute('value');
-  let name = document.querySelector('.profile__title');
-  let occupation = document.querySelector('.profile__subtitle');
-  name.textContent = firstnameInput.value;
-  occupation.textContent = descriptionInput.value;
-  popupProfileClose();
+  firstname.getAttribute('value');
+  description.getAttribute('value');
+  profileTitle.textContent = firstname.value;
+  profileSubtitle.textContent = description.value;
+  closePopup (popupTypeProfile);
 }
 formTypeProfile.addEventListener('submit', formSubmitHandler);
 
-// добавоение карточки
-const elementCard = document.querySelector('.element');
-const formTypeNewCard = document.querySelector('.form_type_new-card');
-const designationInput = formTypeNewCard.querySelector('.form__text_type_name');
-const imageLinkInput = formTypeNewCard.querySelector('.form__text_type_image-link');
-const templateElement = document.querySelector('.element-template');
 
-function createCard (imageLink, designation) {
-  const userCard = templateElement.content.cloneNode(true);
-  const elementImage = userCard.querySelector('.element__image');
-  elementImage.src = imageLink;
-  userCard.querySelector('.element__text').textContent = designation;
-  return userCard;
+//-----------------Добавление новых карточек------------------
+const newCard = document.querySelector('.form_type_new-card');
+const elementContainer = document.querySelector('.elements__container');
+const templateElement = document.querySelector('.element-template').content;
+const imageTitle = document.querySelector('.form__text_type_name');
+const imageLink = document.querySelector('.form__text_type_image-link');
 
-}
-
-function formSubmitAddHandler(evt) {
+function addNewElement (evt) {
   evt.preventDefault();
-  const newCard = createCard (imageLinkInput.value, designationInput.value);
-  elementCard.before(newCard);
-  popupNewcardClose ();
+  elementContainer.prepend(addCards(imageTitle.value, imageLink.value));
+  closePopup(popupTypeNewcard);
+}
+newCard.addEventListener('submit', addNewElement);
+
+
+function addCards(title, image) {
+
+  const userCard = templateElement.cloneNode(true);
+  const cardImage = userCard.querySelector('.element__image');
+  cardImage.src = image;
+  cardImage.alt = title;
+  userCard.querySelector('.element__text').textContent = title;
+  cardImage.addEventListener('click', function() {openPopupTypeZoom(title, image)});
+
+    //-----Удаление карточки-----
+    function elementDelete (evt) {evt.target.closest('.element').remove()};
+    userCard.querySelector('.element__delete').addEventListener('click', elementDelete);
+    //-----Лайк карточки------
+    function elementLike (evt) {evt.target.classList.toggle('element__button_type_liked')};
+    userCard.querySelector('.element__button').addEventListener('click', elementLike);
+
+  return userCard;
 }
 
-formTypeNewCard.addEventListener('submit', formSubmitAddHandler);
+//------------------Добавление карточек из массива-----------------
+function addCardsFromArray(element) {
+  element.forEach(function (item) {
+    const card = addCards(item.name, item.link);
+    elementContainer.prepend(card);
+  });
+}
+addCardsFromArray(initialCards);
+
+//------------Открытие маодального окна с разными карточками------------
+const zoomImage = document.querySelector('.popup__zoom-image');
+const zoomImageTitle = document.querySelector('.popup__zoom-title');
+function openPopupTypeZoom(title, image) {
+  zoomImage.src = image;
+  zoomImage.alt = title;
+  zoomImageTitle.textContent = title;
+  openPopup(popupTypeZoom);
+}
+
+

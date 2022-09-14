@@ -17,6 +17,35 @@ closeButtonProfile.addEventListener('click', function(){closePopup(popupTypeProf
 closeButtonNewcard.addEventListener('click', function(){closePopup(popupTypeNewcard)});
 closeButtonZoom.addEventListener('click', function(){closePopup(popupTypeZoom)});
 
+//----------------Закрытие модальных окон нажатием на Esc-----------
+document.addEventListener('keydown', function(evt){
+  if (evt.key === 'Escape') {
+    closePopup(popupTypeProfile);
+    closePopup(popupTypeNewcard);
+    closePopup(popupTypeZoom);
+  }
+})
+
+//--------------акрытие модальных окон кликом на оверлей-----
+
+// popupTypeProfile.addEventListener('click', function(evt){
+//   if (evt.target === popupTypeProfile) {
+//     closePopup(popupTypeProfile);
+//   }
+// })
+
+function closePopupOverlay(item) {
+  item.addEventListener('click', function(evt){
+    if (evt.target === item) {
+      closePopup(item);
+    }
+  })
+}
+
+closePopupOverlay(popupTypeProfile);
+closePopupOverlay(popupTypeNewcard);
+closePopupOverlay(popupTypeZoom);
+
 
 //----------------Редактирование профиля---------------
 const firstname = document.querySelector('.form__text_type_firstmane');

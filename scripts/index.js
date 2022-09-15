@@ -26,14 +26,7 @@ document.addEventListener('keydown', function(evt){
   }
 })
 
-//--------------акрытие модальных окон кликом на оверлей-----
-
-// popupTypeProfile.addEventListener('click', function(evt){
-//   if (evt.target === popupTypeProfile) {
-//     closePopup(popupTypeProfile);
-//   }
-// })
-
+//--------------Закрытие модальных окон кликом на оверлей-----
 function closePopupOverlay(item) {
   item.addEventListener('click', function(evt){
     if (evt.target === item) {

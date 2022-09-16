@@ -9,3 +9,9 @@
   position: absolute;
   top: 33px;
 }
+
+@media screen and (max-width: 767px) {
+  .form__text-error_active {
+    width: 238px;
+  }
+}

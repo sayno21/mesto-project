@@ -57,30 +57,68 @@ function editProfileForm (evt) {
 }
 formTypeProfile.addEventListener('submit', editProfileForm);
 
-//----------------Пытаемся отвалирировать формы----------------
-const formError = formTypeProfile.querySelector(`.${firstname.id}-error`);
+//----------------Валидациф форм---------------
 
-const showError = (input, errorMessage) => {
-  input.classList.add('form__text-error')
-  formError.textContent = errorMessage;
-  formError.classList.add('form__firstname-text_active');
+const showError = (formElement, inputElement, errorMessage) => {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.add('form__text-error')
+  errorElement.textContent = errorMessage;
+  errorElement.classList.add('form__text-error_active');
 };
 
-const hideError = (input) => {
-  input.classList.remove('form__text-error')
+const hideError = (formElement, inputElement) => {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.remove('form__text-error')
+  errorElement.classList.remove('form__text-error_active');
+  errorElement.textContent = '';
 };
 
-const checkInputValidity = () => {
-  if (!firstname.validity.valid) {
-    showError(firstname, firstname.validationMessage)
+const checkInputValidity = (formElement, inputElement) => {
+  if (!inputElement.validity.valid) {
+    showError(formElement, inputElement, inputElement.validationMessage)
   } else {
-    hideError(firstname)
+    hideError(formElement, inputElement)
   }
 };
 
-firstname.addEventListener('input', function () {
-  checkInputValidity();
+const setEventListeners = (formElement) => {
+  const inputList = Array.from(formElement.querySelectorAll('.form__text'));
+  const buttonElement = formElement.querySelector('.form__button');
+  toggleButtonState(inputList, buttonElement);
+  inputList.forEach((inputElement) => {
+    inputElement.addEventListener('input', function () {
+      checkInputValidity(formElement, inputElement);
+      toggleButtonState(inputList, buttonElement);
+    });
+  });
+}
+
+
+const enableValidation = () => {
+  const formList = Array.from(document.querySelectorAll('.form'));
+  formList.forEach((formElement) => {
+    setEventListeners(formElement);
+  });
+}
+
+
+const hasInvalidInput = (inputList) => {
+  return inputList.some((inputElement) => {
+  return !inputElement.validity.valid;
 });
+}
+
+const toggleButtonState =  (inputList, buttonElement) => {
+    if (hasInvalidInput(inputList)) {
+    buttonElement.classList.add('form__button_type_disabled');
+    buttonElement.setAttribute('disabled', true);
+  } else {
+    buttonElement.classList.remove('form__button_type_disabled');
+    buttonElement.removeAttribute('disabled', true);
+  }
+}
+
+enableValidation ();
 
 //-----------------Добавление новых карточек------------------
 const newCard = document.querySelector('.form_type_new-card');

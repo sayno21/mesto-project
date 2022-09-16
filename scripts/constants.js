@@ -2,7 +2,7 @@
 const initialCards = [
   {
     name: 'Дворы центрального района Санкт-Петербурга',
-    link: 'https://avatars.mds.yandex.net/get-zen_doc/1671180/pub_5e6de84a4f80686f3cb6f394_5e6dec632a0aa97f0bf5074c/scale_1200'
+    link: 'https://sun9-39.userapi.com/c850616/v850616138/18cc42/kY4hyQouHrA.jpg'
   },
   {
     name: 'Парадная',

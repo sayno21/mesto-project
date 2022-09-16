@@ -26,14 +26,7 @@ document.addEventListener('keydown', function(evt){
   }
 })
 
-//--------------акрытие модальных окон кликом на оверлей-----
-
-// popupTypeProfile.addEventListener('click', function(evt){
-//   if (evt.target === popupTypeProfile) {
-//     closePopup(popupTypeProfile);
-//   }
-// })
-
+//--------------Закрытие модальных окон кликом на оверлей-----
 function closePopupOverlay(item) {
   item.addEventListener('click', function(evt){
     if (evt.target === item) {
@@ -48,11 +41,13 @@ closePopupOverlay(popupTypeZoom);
 
 
 //----------------Редактирование профиля---------------
+const formTypeProfile = document.querySelector('.form_type_profile');
 const firstname = document.querySelector('.form__text_type_firstmane');
 const description = document.querySelector('.form__text_type_description');
+
+
 const profileTitle = document.querySelector('.profile__title');
 const profileSubtitle = document.querySelector('.profile__subtitle');
-const formTypeProfile = document.querySelector('.form_type_profile');
 
 function editProfileForm (evt) {
   evt.preventDefault();
@@ -62,6 +57,30 @@ function editProfileForm (evt) {
 }
 formTypeProfile.addEventListener('submit', editProfileForm);
 
+//----------------Пытаемся отвалирировать формы----------------
+const formError = formTypeProfile.querySelector(`.${firstname.id}-error`);
+
+const showError = (input, errorMessage) => {
+  input.classList.add('form__text-error')
+  formError.textContent = errorMessage;
+  formError.classList.add('form__firstname-text_active');
+};
+
+const hideError = (input) => {
+  input.classList.remove('form__text-error')
+};
+
+const checkInputValidity = () => {
+  if (!firstname.validity.valid) {
+    showError(firstname, firstname.validationMessage)
+  } else {
+    hideError(firstname)
+  }
+};
+
+firstname.addEventListener('input', function () {
+  checkInputValidity();
+});
 
 //-----------------Добавление новых карточек------------------
 const newCard = document.querySelector('.form_type_new-card');

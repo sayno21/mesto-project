@@ -57,8 +57,8 @@ function editProfileForm (evt) {
 }
 formTypeProfile.addEventListener('submit', editProfileForm);
 
-//----------------Валидациф форм---------------
-
+//----------------Валидация форм---------------
+//
 const showError = (formElement, inputElement, errorMessage) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.add('form__text-error')

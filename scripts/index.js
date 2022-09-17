@@ -74,6 +74,11 @@ const hideError = (formElement, inputElement) => {
 };
 
 const checkInputValidity = (formElement, inputElement) => {
+  if (inputElement.validity.patternMismatch) {
+    inputElement.setCustomValidity(inputElement.dataset.errorMessage);
+  } else {
+    inputElement.setCustomValidity("");
+  }
   if (!inputElement.validity.valid) {
     showError(formElement, inputElement, inputElement.validationMessage)
   } else {

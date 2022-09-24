@@ -2,7 +2,7 @@
   cursor: pointer;
   background-color: transparent;
   border: 1px solid #FFFFFF;
-  background-image: url(../../../image/pencil.svg);
+  background-image: url(../../../images/pencil.svg);
   background-repeat: no-repeat;
   background-position: 50% 50%;
   width: 24px;
@@ -13,7 +13,7 @@
 
 @media screen and (max-width: 425px) {
   .profile__edit-button {
-    background-image: url(../../../image/pencil-tiny.svg);
+    background-image: url(../../../images/pencil-tiny.svg);
     width: 18px;
     height: 18px;
   }

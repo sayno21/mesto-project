@@ -1,5 +1,5 @@
 //--------------------Готовый массив карточек-------------------
-const initialCards = [
+export const initialCards = [
   {
     name: 'Дворы центрального района Санкт-Петербурга',
     link: 'https://sun9-39.userapi.com/c850616/v850616138/18cc42/kY4hyQouHrA.jpg'

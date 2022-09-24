@@ -4,7 +4,7 @@
   height: 50px;
   background-color: transparent;
   border: 2px solid #FFFFFF;
-  background-image: url(../../../image/plus.svg);
+  background-image: url(../../../images/plus.svg);
   background-repeat: no-repeat;
   background-position: 50% 50%;
   border-radius: 2px;
@@ -14,7 +14,7 @@
   .profile__add-button {
     width: 282px;
     margin-top: 36px;
-    background-image: url(../../../image/plus-little.svg);
+    background-image: url(../../../images/plus-little.svg);
   }
 }
 

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Mesto">
+  <meta name="keywords" content="фото фотография социальная сеть загрузи снимки">
+  <meta name="author" content="Руслан Щербаков">
+  <title>Mesto</title>
+</head>
+<body class="body">
+  <div class="page">
+    <header class="header">
+      <img src="<%=require('./images/lodo-mesto.svg')%>" alt="Логотип Место" class="header__logo">
+    </header>
+    <main class="content">
+      <section class="profile">
+        <img src="<%=require('./images/danila.jpg')%>" alt="Аватар" class="profile__image">
+        <div class="profile__info">
+          <div>
+            <h1 class="profile__title">Данила Багров</h1>
+            <p class="profile__subtitle">Исследователь Питера</p>
+          </div>
+          <button class="profile__edit-button" aria-label="Edit-button" type="button"></button>
+        </div>
+          <button class="profile__add-button" aria-label="Add-button" type="button"></button>
+      </section>
+      <section class="elements" aria-label="Title">
+        <ul class="elements__container">
+
+        </ul>
+      </section>
+
+      <div class="popup popup_type_profile">
+        <div class="popup__container">
+          <form name="profile-form" action="submit" method="post" class="form form_type_profile" novalidate>
+            <h2 class="form__title">Редактировать профиль</h2>
+            <label for="firstname-text" class="form__field">
+              <input type="text" id="firstname-text" class="form__text form__text-error form__text_type_firstmane" name="firstname" value="" placeholder="Имя" required minlength="2" maxlength="40" pattern="^[a-zA-Zа-яёА-ЯЁ\- ]+$" data-error-message="Разрешены только латинские буквы, кириллические буквы, знаки дефиса и пробелы.">
+              <span class="firstname-text-error"></span>
+            </label>
+            <label for="description-text" class="form__field">
+              <input type="text" id="description-text" class="form__text form__text_type_description" name="description" value="" placeholder="Специализация" required minlength="2" maxlength="200" pattern="^[a-zA-Zа-яёА-ЯЁ\- ]+$" data-error-message="Разрешены только латинские буквы, кириллические буквы, знаки дефиса и пробелы.">
+              <span class="description-text-error"></span>
+            </label>
+            <button type="submit" class="form__button" aria-label="Save-button">Сохранить</button>
+          </form>
+          <button class="popup__close-button close-button_profile" type="button" aria-label="Close-button"></button>
+        </div>
+      </div>
+
+      <div class="popup popup_type_new-card">
+        <div class="popup__container">
+          <form name="new-card-form" novalidate action="#" method="post" class="form form_type_new-card">
+            <h2 class="form__title">Новое место</h2>
+            <label for="designation-text" class="form__field">
+              <input type="text" id="designation-text" class="form__text form__text_type_name" name="designation" placeholder="Название" required minlength="2" maxlength="30" pattern="^[a-zA-Zа-яёА-ЯЁ\- ]+$" data-error-message="Разрешены только латинские буквы, кириллические буквы, знаки дефиса и пробелы.">
+              <span class="designation-text-error"></span>
+            </label>
+            <label for="image-link-text" class="form__field">
+              <input type="url" id="image-link-text" class="form__text form__text_type_image-link" name="image-link" placeholder="Ссылка на картинку" required>
+              <span class="image-link-text-error"></span>
+            </label>
+            <button type="submit" class="form__button" aria-label="Save-button">Сохранить</button>
+          </form>
+          <button class="popup__close-button close-button_new-card" type="button" aria-label="Close-button"></button>
+        </div>
+      </div>
+
+      <div class="popup popup_type_zoom">
+        <div class="popup__zoom-container">
+          <img src="" alt="Байкал" class="popup__zoom-image">
+          <p class="popup__zoom-title">Архыз</p>
+          <button class="popup__close-button popup__close-button_zoom-image" type="button" aria-label="Close-button"></button>
+        </div>
+      </div>
+
+    </main>
+    <footer class="footer">
+      <p class="footer__copyrights">&copy; 2020 Mesto Russia</p>
+    </footer>
+  </div>
+
+<template class="element-template">
+  <li class="element">
+    <img src="" alt="" class="element__image image-zoom">
+    <button class="element__delete" type="button" aria-label="Delete-button"></button>
+    <div class="element__subtitle">
+      <h2 class="element__text"></h2>
+      <button class="element__button" type="button" aria-label="Like-button"></button>
+    </div>
+  </li>
+</template>
+
+</body>
+</html>

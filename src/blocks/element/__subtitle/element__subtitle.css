@@ -1,0 +1,10 @@
+.element__subtitle {
+  max-width: 282px;
+  width: 100%;
+  margin: 0;
+  padding: 25px 0 31px 0;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

@@ -1,0 +1,17 @@
+.form__text-error_active {
+  display: block;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  color: #FF0000;
+  margin: 0px;
+  width: 358px;
+  position: absolute;
+  top: 33px;
+}
+
+@media screen and (max-width: 767px) {
+  .form__text-error_active {
+    width: 238px;
+  }
+}

@@ -1,0 +1,6 @@
+.profile__image {
+  border-radius: 50%;
+  max-width: 123px;
+  flex-grow: 1;
+}
+

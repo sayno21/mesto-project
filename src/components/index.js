@@ -1,10 +1,30 @@
 import '../index.css';
-import {initialCards, popupTypeProfile, popupTypeNewcard, popupTypeZoom} from './constants';
+import {initialCards, popupTypeProfile, popupTypeNewcard, popupTypeZoom, elementContainer, imageTitle, imageLink, newCard} from './constants';
 import {enableValidation} from './validate';
-import {closePopupOverlay} from './modal';
-import {addCardsFromArray} from './card';
-import {formTypeProfile, editProfileForm} from './utilits';
+import {closePopupOverlay, openPopup, closePopup} from './modal';
+import {addCards} from './card';
 
+//Добавление новой карточки по сабмиту
+function addNewElement (evt) {
+  evt.preventDefault();
+  elementContainer.prepend(addCards(imageTitle.value, imageLink.value));
+  closePopup(popupTypeNewcard);
+}
+newCard.addEventListener('submit', addNewElement);
+
+//Редактирование профиля
+const formTypeProfile = document.querySelector('.form_type_profile');
+const firstname = document.querySelector('.form__text_type_firstmane');
+const description = document.querySelector('.form__text_type_description');
+const profileTitle = document.querySelector('.profile__title');
+const profileSubtitle = document.querySelector('.profile__subtitle');
+
+function editProfileForm (evt) {
+  evt.preventDefault();
+  profileTitle.textContent = firstname.value;
+  profileSubtitle.textContent = description.value;
+  closePopup (popupTypeProfile);
+}
 
 
 //Вызов закрытие попапов кликом на оверлей
@@ -15,15 +35,27 @@ closePopupOverlay(popupTypeZoom);
 //слушатель редактирования формы профиля
 formTypeProfile.addEventListener('submit', editProfileForm);
 
-
 //Вызов валидации форм
 enableValidation ();
 
 //Вызов добавления карточек из массива
+function addCardsFromArray(element) {
+  element.forEach(function (item) {
+    const card = addCards(item.name, item.link);
+    elementContainer.prepend(card);
+  });
+}
 addCardsFromArray(initialCards);
 
-
-
+//Открытие маодального окна с разными карточками
+const zoomImage = document.querySelector('.popup__zoom-image');
+const zoomImageTitle = document.querySelector('.popup__zoom-title');
+export function openPopupTypeZoom(title, image) {
+  zoomImage.src = image;
+  zoomImage.alt = title;
+  zoomImageTitle.textContent = title;
+  openPopup(popupTypeZoom);
+}
 
 
 

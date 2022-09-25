@@ -1,24 +1,11 @@
-import {popupTypeNewcard} from './constants';
-import {closePopup, openPopupTypeZoom} from './modal';
+import {openPopupTypeZoom} from './index';
 
 //-----------------Добавление новых карточек------------------
-export const newCard = document.querySelector('.form_type_new-card');
-const elementContainer = document.querySelector('.elements__container');
+
 const templateElement = document.querySelector('.element-template').content;
-const imageTitle = document.querySelector('.form__text_type_name');
-const imageLink = document.querySelector('.form__text_type_image-link');
-
-function addNewElement (evt) {
-  evt.preventDefault();
-  elementContainer.prepend(addCards(imageTitle.value, imageLink.value));
-  newCard.reset();
-  closePopup(popupTypeNewcard);
-}
-
-newCard.addEventListener('submit', addNewElement);
 
 
- function addCards(title, image) {
+export function addCards(title, image) {
 
   const userCard = templateElement.cloneNode(true);
   const cardImage = userCard.querySelector('.element__image');
@@ -35,14 +22,6 @@ newCard.addEventListener('submit', addNewElement);
     userCard.querySelector('.element__button').addEventListener('click', elementLike);
 
   return userCard;
-}
-
-//------------------Добавление карточек из массива-----------------
-export function addCardsFromArray(element) {
-  element.forEach(function (item) {
-    const card = addCards(item.name, item.link);
-    elementContainer.prepend(card);
-  });
 }
 
 

@@ -1,4 +1,5 @@
-import {popupTypeProfile, closePopup} from './modal';
+import {popupTypeProfile} from './constants';
+import {closePopup} from './modal';
 
 //----------------Редактирование профиля---------------
 export const formTypeProfile = document.querySelector('.form_type_profile');

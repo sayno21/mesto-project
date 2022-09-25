@@ -6,15 +6,15 @@
     margin: 0 auto;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 900px) {
     .elements__container{
     grid-template-columns: repeat(2, 1fr);
     max-width: 525px;
     }
-    
+
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 600px) {
     .elements__container {
         grid-template-columns: 1fr;
         max-width: 282px;

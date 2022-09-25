@@ -1,9 +1,8 @@
+import {popupTypeProfile, popupTypeNewcard, popupTypeZoom} from './constants';
+
 //---------------Открытие/Закрытие модальных окон---------------
-export const popupTypeProfile = document.querySelector('.popup_type_profile');
-export const popupTypeNewcard = document.querySelector('.popup_type_new-card');
 const profileEditButton = document.querySelector('.profile__edit-button');
 const profileAddButton = document.querySelector('.profile__add-button');
-export const popupTypeZoom = document.querySelector('.popup_type_zoom');
 const closeButtonProfile = document.querySelector('.close-button_profile');
 const closeButtonNewcard = document.querySelector('.close-button_new-card');
 const closeButtonZoom = document.querySelector('.popup__close-button_zoom-image');

@@ -1,3 +1,7 @@
+export const popupTypeProfile = document.querySelector('.popup_type_profile');
+export const popupTypeNewcard = document.querySelector('.popup_type_new-card');
+export const popupTypeZoom = document.querySelector('.popup_type_zoom');
+
 //--------------------Готовый массив карточек-------------------
 export const initialCards = [
   {

@@ -1,4 +1,5 @@
-import {closePopup, popupTypeNewcard, openPopupTypeZoom} from './modal';
+import {popupTypeNewcard} from './constants';
+import {closePopup, openPopupTypeZoom} from './modal';
 
 //-----------------Добавление новых карточек------------------
 export const newCard = document.querySelector('.form_type_new-card');

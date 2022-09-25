@@ -1,8 +1,8 @@
 import '../index.css';
+import {initialCards, popupTypeProfile, popupTypeNewcard, popupTypeZoom} from './constants';
 import {enableValidation} from './validate';
-import {popupTypeProfile, popupTypeNewcard, popupTypeZoom, closePopupOverlay,} from './modal';
+import {closePopupOverlay} from './modal';
 import {addCardsFromArray} from './card';
-import {initialCards} from './constants';
 import {formTypeProfile, editProfileForm} from './utilits';
 
 

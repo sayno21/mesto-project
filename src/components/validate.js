@@ -1,18 +1,26 @@
+import {popupTypeNewcard} from './constants';
 //----------------Валидация форм---------------
-
+const settings = {
+  formSelector: '.form',
+  inputSelector: '.form__text',
+  submitButtonSelector: '.form__button',
+  inactiveButtonClass: 'form__button_type_disabled',
+  inputErrorClass: 'form__text-error',
+  errorClass: 'form__text-error_active'
+}
 //показывает сообщение об ошибке
 const showError = (formElement, inputElement, errorMessage) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add('form__text-error')
+  inputElement.classList.add(settings.inputErrorClass)
   errorElement.textContent = errorMessage;
-  errorElement.classList.add('form__text-error_active');
+  errorElement.classList.add(settings.errorClass);
 };
 
 //скрывает сообщение об ошибке
 const hideError = (formElement, inputElement) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove('form__text-error')
-  errorElement.classList.remove('form__text-error_active');
+  inputElement.classList.remove(settings.inputErrorClass)
+  errorElement.classList.remove(settings.errorClass);
   errorElement.textContent = '';
 };
 
@@ -33,8 +41,8 @@ const checkInputValidity = (formElement, inputElement) => {
 
 //проверяет все поля ввода на валидацию по введенным символам и отключает или включает кнопку
 const setEventListeners = (formElement) => {
-  const inputList = Array.from(formElement.querySelectorAll('.form__text'));
-  const buttonElement = formElement.querySelector('.form__button');
+  const inputList = Array.from(formElement.querySelectorAll(settings.inputSelector));
+  const buttonElement = formElement.querySelector(settings.submitButtonSelector);
   toggleButtonState(inputList, buttonElement);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', function () {
@@ -46,7 +54,7 @@ const setEventListeners = (formElement) => {
 
 //валидация всех форм
 export const enableValidation = () => {
-  const formList = Array.from(document.querySelectorAll('.form'));
+  const formList = Array.from(document.querySelectorAll(settings.formSelector));
   formList.forEach((formElement) => {
     setEventListeners(formElement);
   });
@@ -62,10 +70,19 @@ const hasInvalidInput = (inputList) => {
 //переключатель состояния кнопки
 const toggleButtonState =  (inputList, buttonElement) => {
     if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add('form__button_type_disabled');
+    buttonElement.classList.add(settings.inactiveButtonClass);
     buttonElement.setAttribute('disabled', true);
   } else {
-    buttonElement.classList.remove('form__button_type_disabled');
+    buttonElement.classList.remove(settings.inactiveButtonClass);
     buttonElement.removeAttribute('disabled', true);
   }
 }
+
+
+export const  stayButtonDidabled = () => {
+  const saveButton = popupTypeNewcard.querySelector('.form__button');
+  saveButton.classList.add(settings.inactiveButtonClass);
+  saveButton.setAttribute('disabled', true);
+}
+
+

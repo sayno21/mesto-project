@@ -3,11 +3,11 @@ import {openPopupTypeZoom} from './index';
 //-----------------Добавление новых карточек------------------
 
 const templateElement = document.querySelector('.element-template').content;
-
+const elementContent = templateElement.querySelector('.element');
 
 export function addCards(title, image) {
 
-  const userCard = templateElement.cloneNode(true);
+  const userCard = elementContent.cloneNode(true);
   const cardImage = userCard.querySelector('.element__image');
   cardImage.src = image;
   cardImage.alt = title;

@@ -4,6 +4,7 @@ import {enableValidation} from './validate';
 import {closePopupOverlay, openPopup, closePopup} from './modal';
 import {addCards} from './card';
 
+
 //Добавление новой карточки по сабмиту
 function addNewElement (evt) {
   evt.preventDefault();

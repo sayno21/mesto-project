@@ -8,15 +8,16 @@ const closeButtonProfile = document.querySelector('.close-button_profile');
 const closeButtonNewcard = document.querySelector('.close-button_new-card');
 const closeButtonZoom = document.querySelector('.popup__close-button_zoom-image');
 
+function listenEscape (evt){
+  if (evt.key === 'Escape') {
+    const item = document.querySelector('.popup_opened');
+    closePopup(item);
+  }
+}
+
 export function openPopup(popup) {
   popup.classList.add('popup_opened');
-  document.addEventListener('keydown', function(evt){
-    if (evt.key === 'Escape') {
-      const item = document.querySelector('.popup_opened');
-      closePopup(item);
-    }
-
-  });
+  document.addEventListener('keydown', listenEscape);
 
 }
 
@@ -29,7 +30,10 @@ profileAddButton.addEventListener('click', function() {
   newCard.reset();stayButtonDidabled();
 });
 
-export function closePopup(popup) {popup.classList.remove('popup_opened')};
+export function closePopup(popup) {
+  popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', listenEscape);
+};
 closeButtonProfile.addEventListener('click', function(){closePopup(popupTypeProfile)});
 closeButtonNewcard.addEventListener('click', function(){closePopup(popupTypeNewcard)});
 closeButtonZoom.addEventListener('click', function(){closePopup(popupTypeZoom)});

@@ -80,7 +80,7 @@ const toggleButtonState =  (inputList, buttonElement) => {
 
 
 export const  stayButtonDidabled = () => {
-  const saveButton = popupTypeNewcard.querySelector('.form__button');
+  const saveButton = popupTypeNewcard.querySelector(settings.submitButtonSelector);
   saveButton.classList.add(settings.inactiveButtonClass);
   saveButton.setAttribute('disabled', true);
 }

@@ -1,5 +1,5 @@
 import {checkRes} from './utilits';
-
+// export function foo () {console.log('Hello World!')};
 // const config = {
 //   baseUrl: 'https://nomoreparties.co/v1/plus-cohort-15',
 //   headers: {
@@ -19,7 +19,7 @@ import {checkRes} from './utilits';
 //     console.log(result);
 //   });
 
-console.log('Hello World!');
+
 //Загрузка информации о пользователе с сервера
 fetch('https://nomoreparties.co/v1/plus-cohort-17/users/me', {
   headers: {

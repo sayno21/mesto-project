@@ -3,6 +3,7 @@ import {initialCards, popupTypeProfile, popupTypeNewcard, popupTypeZoom, element
 import {enableValidation} from './validate';
 import {closePopupOverlay, openPopup, closePopup} from './modal';
 import {addCards} from './card';
+import {foo} from './api'
 
 //Добавление новой карточки по сабмиту
 function addNewElement (evt) {
@@ -56,7 +57,4 @@ export function openPopupTypeZoom(title, image) {
   zoomImageTitle.textContent = title;
   openPopup(popupTypeZoom);
 }
-
-
-
 

@@ -1,5 +1,4 @@
 import {openPopupTypeZoom} from './index';
-
 //-----------------Добавление новых карточек------------------
 
 const templateElement = document.querySelector('.element-template').content;

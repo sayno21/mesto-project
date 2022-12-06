@@ -21,16 +21,27 @@ import {checkRes} from './utilits';
 
 
 //Загрузка информации о пользователе с сервера
+
+
 fetch('https://nomoreparties.co/v1/plus-cohort-17/users/me', {
   headers: {
     authorization: 'c977941d-c8c4-4145-ba23-754c541f6927'
   }
 })
   .then((res) => {
+    if (res.ok) {
     return res.json();
+    }
+    return Promise.reject(res.status);
   })
-  .then((data) => {
-    console.log(data);
+  .then((res) => {
+    console.log(res.name);
+    renderResult(res.name);
   });
+
+  function renderResult(text) {
+    const firstname = document.querySelector('.profile__title');
+    firstname.textContent = text;
+  }
 
 

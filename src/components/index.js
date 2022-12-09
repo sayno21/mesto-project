@@ -17,8 +17,8 @@ newCard.addEventListener('submit', addNewElement);
 const formTypeProfile = document.querySelector('.form_type_profile');
 const firstname = document.querySelector('.form__text_type_firstmane');
 const description = document.querySelector('.form__text_type_description');
-const profileTitle = document.querySelector('.profile__title');
-const profileSubtitle = document.querySelector('.profile__subtitle');
+export const profileTitle = document.querySelector('.profile__title');
+export const profileSubtitle = document.querySelector('.profile__subtitle');
 
 function editProfileForm (evt) {
   evt.preventDefault();
@@ -40,13 +40,13 @@ formTypeProfile.addEventListener('submit', editProfileForm);
 enableValidation ();
 
 //Вызов добавления карточек из массива
-function addCardsFromArray(element) {
+export function addCardsFromArray(element) {
   element.forEach(function (item) {
     const card = addCards(item.name, item.link);
     elementContainer.prepend(card);
   });
 }
-addCardsFromArray(initialCards);
+
 
 //Открытие маодального окна с разными карточками
 const zoomImage = document.querySelector('.popup__zoom-image');

@@ -1,17 +1,10 @@
 import '../index.css';
-import {popupTypeProfile, popupTypeNewcard, popupTypeZoom, elementContainer, imageTitle, imageLink, newCard} from './constants';
+import {popupTypeProfile, popupTypeNewcard, popupTypeZoom, elementContainer, imageTitle, imageLink, newCard, popupTypeAvatar, avatarLink, avatarImage, avatarForm} from './constants';
 import {enableValidation} from './validate';
 import {closePopupOverlay, openPopup, closePopup} from './modal';
 import {addCards} from './card';
-import {getProfileInfo, loadCardsFromServer, sendProfileInfo} from './api';
+import {getProfileInfo, loadCardsFromServer, sendNewCard, sendProfileInfo, loadNewAvatar} from './api';
 
-//Добавление новой карточки по сабмиту
-function addNewElement (evt) {
-  evt.preventDefault();
-  elementContainer.prepend(addCards(imageTitle.value, imageLink.value));
-  closePopup(popupTypeNewcard);
-}
-newCard.addEventListener('submit', addNewElement);
 
 //Редактирование профиля
 export const formTypeProfile = document.querySelector('.form_type_profile');
@@ -20,18 +13,12 @@ export const description = document.querySelector('.form__text_type_description'
 export const profileTitle = document.querySelector('.profile__title');
 export const profileSubtitle = document.querySelector('.profile__subtitle');
 
-// function editProfileForm (evt) {
-//   evt.preventDefault();
-//   profileTitle.textContent = firstname.value;
-//   profileSubtitle.textContent = description.value;
-//   closePopup (popupTypeProfile);
-// }
-
 
 //Вызов закрытие попапов кликом на оверлей
 closePopupOverlay(popupTypeProfile);
 closePopupOverlay(popupTypeNewcard);
 closePopupOverlay(popupTypeZoom);
+closePopupOverlay(popupTypeAvatar);
 
 //слушатель редактирования формы профиля
 formTypeProfile.addEventListener('submit', editProfileForm);
@@ -105,3 +92,46 @@ function editProfileForm (evt) {
     })
 
 }
+
+//Добавляем новую карточку
+function addNewElement (evt) {
+  evt.preventDefault();
+  const cardData = {
+    name: imageTitle.value,
+    link: imageLink.value
+  }
+  sendNewCard(cardData);
+  elementContainer.prepend(addCards(imageTitle.value, imageLink.value));
+  closePopup(popupTypeNewcard);
+}
+newCard.addEventListener('submit', addNewElement);
+
+
+//Добавляем новый аватар
+// function avatarFormSubmit(e) {
+//   e.preventDefault()
+//   avatarSaveButton.textContent = 'Сохранение...'
+
+//   changeAvatar(avatarInput.value)
+//     .then(res => {
+//       profileAvatar.src = res.avatar
+//       avatarForm.reset()
+//       closePopup()
+//     })
+//     .catch(err => console.log(err))
+//     .finally(() => avatarSaveButton.textContent = 'Сохранить')
+// }
+
+function submitNewAvatar(evt) {
+  evt.preventDefault();
+  loadNewAvatar(avatarLink.value)
+    .then((res) => {
+      avatarImage.src = res.avatar;
+      avatarForm.reset();
+      closePopup(popupTypeAvatar);
+    })
+
+
+}
+avatarForm.addEventListener('submit', submitNewAvatar);
+

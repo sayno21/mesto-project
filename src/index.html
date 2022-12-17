@@ -15,7 +15,10 @@
     </header>
     <main class="content">
       <section class="profile">
-        <img src="<%=require('./images/danila.jpg')%>" alt="Аватар" class="profile__image">
+        <button class="profile__avatar-button" type="button" aria-label="Avatar-button">
+          <img src="<%=require('./images/danila.jpg')%>" alt="Аватар" class="profile__image">
+        </button>
+
         <div class="profile__info">
           <div>
             <h1 class="profile__title">Данила Багров</h1>
@@ -74,6 +77,22 @@
           <button class="popup__close-button popup__close-button_zoom-image" type="button" aria-label="Close-button"></button>
         </div>
       </div>
+
+      <div class="popup popup_type_avatar">
+        <div class="popup__container">
+          <form action="#" novalidate name="avatar-form" method="post" class="form form_type_avatar">
+            <h2 class="form__title">Обновить аватар</h2>
+
+            <label for="avatar-link-text" class="form__field">
+              <input type="url" id="avatar-link-text" class="form__text form__text_type_avatar-link" name="avatar-link" placeholder="Ссылка на картинку" required>
+              <span class="avatar-link-text-error"></span>
+            </label>
+            <button type="submit" class="form__button" aria-label="Save-button">Сохранить</button>
+          </form>
+          <button class="popup__close-button popup__close-button_avatar" type="button" aria-label="Close-button"></button>
+        </div>
+      </div>
+
 
     </main>
     <footer class="footer">

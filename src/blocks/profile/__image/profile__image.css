@@ -3,5 +3,6 @@
   max-width: 123px;
   aspect-ratio: 1/1;
   flex-grow: 1;
+  object-fit: cover;
 }
 

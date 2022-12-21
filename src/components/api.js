@@ -59,7 +59,8 @@ export const loadNewAvatar = (url) => {
   return fetch('https://nomoreparties.co/v1/plus-cohort-17/users/me/avatar', {
     method: 'PATCH',
     headers: {
-      authorization: 'c977941d-c8c4-4145-ba23-754c541f6927'
+      authorization: 'c977941d-c8c4-4145-ba23-754c541f6927',
+      'Content-Type': 'application/json'
     },
     body: JSON.stringify({avatar: url})
   })

@@ -1,5 +1,5 @@
 import '../index.css';
-import {popupTypeProfile, popupTypeNewcard, popupTypeZoom, elementContainer, imageTitle, imageLink, newCard, popupTypeAvatar, avatarLink, avatarImage, avatarForm} from './constants';
+import {popupTypeProfile, popupTypeNewcard, popupTypeZoom, elementContainer, imageTitle, imageLink, newCard, popupTypeAvatar, avatarLink, avatarImage, avatarForm, buttonSaverNewCard, buttonSaverProfile, buttonSaverAvatar} from './constants';
 import {enableValidation} from './validate';
 import {closePopupOverlay, openPopup, closePopup} from './modal';
 import {addCards} from './card';
@@ -79,6 +79,7 @@ loadCardsFromServer()
 //Отображаем обновленные данные пользователя
 function editProfileForm (evt) {
   evt.preventDefault();
+  buttonSaverProfile.textContent = 'Сохраняем...'
   const data = {
     name: firstname.value,
     about: description.value
@@ -96,6 +97,7 @@ function editProfileForm (evt) {
 //Добавляем новую карточку
 function addNewElement (evt) {
   evt.preventDefault();
+  buttonSaverNewCard.textContent = 'Сохраняем...'
   const cardData = {
     name: imageTitle.value,
     link: imageLink.value
@@ -108,30 +110,15 @@ newCard.addEventListener('submit', addNewElement);
 
 
 //Добавляем новый аватар
-// function avatarFormSubmit(e) {
-//   e.preventDefault()
-//   avatarSaveButton.textContent = 'Сохранение...'
-
-//   changeAvatar(avatarInput.value)
-//     .then(res => {
-//       profileAvatar.src = res.avatar
-//       avatarForm.reset()
-//       closePopup()
-//     })
-//     .catch(err => console.log(err))
-//     .finally(() => avatarSaveButton.textContent = 'Сохранить')
-// }
-
 function submitNewAvatar(evt) {
   evt.preventDefault();
   loadNewAvatar(avatarLink.value)
     .then((res) => {
       avatarImage.src = res.avatar;
+      buttonSaverAvatar.textContent = 'Сохраняем...'
       avatarForm.reset();
       closePopup(popupTypeAvatar);
     })
-
-
 }
 avatarForm.addEventListener('submit', submitNewAvatar);
 

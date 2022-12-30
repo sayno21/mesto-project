@@ -27,6 +27,9 @@
 @import url(./blocks/element/__subtitle/element__subtitle.css);
 @import url(./blocks/element/__text/element__text.css);
 @import url(./blocks/element/__delete/element__delete.css);
+@import url(./blocks/element/__like-container/element__like-container.css);
+@import url(./blocks/element/__like-counter/element__like-counter.css);
+
 @import url(./blocks/popup/popup.css);
 @import url(./blocks/popup/_type/popup_type_zoom.css);
 @import url(./blocks/popup/_opened/popup_opened.css);

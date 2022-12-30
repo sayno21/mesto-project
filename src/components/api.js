@@ -66,3 +66,15 @@ export const loadNewAvatar = (url) => {
   })
   .then((res) => checkRes(res))
 }
+
+//Отправляем лайк карточки
+export function addCardLike(cardId) {
+  return fetch(`https://nomoreparties.co/v1/plus-cohort-17/cards/likes/${cardId}`, {
+    method: "PUT",
+    headers: {
+      authorization: 'c977941d-c8c4-4145-ba23-754c541f6927',
+      'Content-Type': 'application/json'
+    }
+  })
+  .then((res) => checkRes(res))
+}

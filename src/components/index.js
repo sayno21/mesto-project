@@ -71,10 +71,12 @@ function addCardsFromArray(element) {
   });
 }
 
+
 loadCardsFromServer()
   .then((res) => {
     addCardsFromArray(res);
-  });
+  })
+
 
 //Отображаем обновленные данные пользователя
 function editProfileForm (evt) {
@@ -121,4 +123,7 @@ function submitNewAvatar(evt) {
     })
 }
 avatarForm.addEventListener('submit', submitNewAvatar);
+
+//Отображаем количество лайков карточки
+//const likeCounter = document.querySelector('.element__like-counter');
 

@@ -14,9 +14,6 @@ export const getProfileInfo = () => {
     headers: config.headers
 })
   .then((res) => checkRes(res))
-  .catch((err) => {
-    console.log(err);
-  });
 }
 
 
@@ -26,9 +23,6 @@ export const loadCardsFromServer = () => {
     headers: config.headers
 })
   .then((res) => checkRes(res))
-  .catch((err) => {
-    console.log(err);
-  });
 }
 
 
@@ -43,9 +37,6 @@ export const sendProfileInfo = (data) => {
     })
   })
     .then((res) => checkRes(res))
-    .catch((err) => {
-      console.log(err);
-    });
 }
 
 //Отправка новой карточки
@@ -59,9 +50,6 @@ export const sendNewCard = (name, link) => {
     })
   })
   .then((res) => checkRes(res))
-  .catch((err) => {
-    console.log(err);
-  });
 }
 
 //Отправляем новый аватар
@@ -72,9 +60,6 @@ export const loadNewAvatar = (url) => {
     body: JSON.stringify({avatar: url})
   })
   .then((res) => checkRes(res))
-  .catch((err) => {
-    console.log(err);
-  });
 }
 
 //Отправляем лайк карточки
@@ -84,9 +69,6 @@ export const addCardLike = (cardId) => {
     headers: config.headers
   })
   .then((res) => checkRes(res))
-  .catch((err) => {
-    console.log(err);
-  });
 }
 
 //Удаляеи лайк карточки
@@ -96,9 +78,6 @@ export const deleteCardLike = (cardId) => {
     headers: config.headers
   })
   .then((res) => checkRes(res))
-  .catch((err) => {
-    console.log(err);
-  });
 }
 
 //Удаляем карточку с сервера
@@ -108,7 +87,4 @@ export const deleteCardFromServer = (cardId) => {
     headers: config.headers
   })
   .then((res) => checkRes(res))
-  .catch((err) => {
-    console.log(err);
-  });
 }

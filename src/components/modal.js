@@ -1,10 +1,6 @@
 import {popupTypeProfile, popupTypeNewcard, popupTypeZoom, newCard, popupTypeAvatar} from './constants';
-import {stayButtonDidabled} from './validate';
 
 //---------------Открытие/Закрытие модальных окон---------------
-const profileEditButton = document.querySelector('.profile__edit-button');
-const profileAddButton = document.querySelector('.profile__add-button');
-const profileAvatarButton = document.querySelector('.profile__avatar-button')
 const closeButtonProfile = document.querySelector('.close-button_profile');
 const closeButtonNewcard = document.querySelector('.close-button_new-card');
 const closeButtonZoom = document.querySelector('.popup__close-button_zoom-image');
@@ -23,18 +19,7 @@ export function openPopup(popup) {
 
 }
 
-profileEditButton.addEventListener('click', function() {
-  openPopup(popupTypeProfile)
-});
 
-profileAddButton.addEventListener('click', function() {
-  openPopup(popupTypeNewcard);
-  newCard.reset();stayButtonDidabled();
-});
-
-profileAvatarButton.addEventListener('click', function() {
-  openPopup(popupTypeAvatar);
-})
 
 export function closePopup(popup) {
   popup.classList.remove('popup_opened');
@@ -56,4 +41,12 @@ export function closePopupOverlay(item) {
   })
 }
 
-
+//Открытие маодального окна с разными карточками
+const zoomImage = document.querySelector('.popup__zoom-image');
+const zoomImageTitle = document.querySelector('.popup__zoom-title');
+export function openPopupTypeZoom(title, image) {
+  zoomImage.src = image;
+  zoomImage.alt = title;
+  zoomImageTitle.textContent = title;
+  openPopup(popupTypeZoom);
+};

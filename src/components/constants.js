@@ -1,35 +1,19 @@
 export const popupTypeProfile = document.querySelector('.popup_type_profile');
 export const popupTypeNewcard = document.querySelector('.popup_type_new-card');
 export const popupTypeZoom = document.querySelector('.popup_type_zoom');
-export const elementContainer = document.querySelector('.elements__container');
+export const popupTypeAvatar = document.querySelector('.popup_type_avatar')
 export const newCard = document.querySelector('.form_type_new-card');
 export const imageTitle = document.querySelector('.form__text_type_name');
 export const imageLink = document.querySelector('.form__text_type_image-link');
+export const avatarLink = document.querySelector('.form__text_type_avatar-link');
+export const avatarImage = document.querySelector('.profile__image');
+export const avatarForm = document.querySelector('.form_type_avatar');
+export const buttonSaverNewCard = document.querySelector('.form__button_type_new-card');
+export const buttonSaverProfile = document.querySelector('.form__button_type_profile');
+export const buttonSaverAvatar = document.querySelector('.form__button_type_avatar');
+export const formTypeProfile = document.querySelector('.form_type_profile');
+export const firstname = document.querySelector('.form__text_type_firstmane');
+export const description = document.querySelector('.form__text_type_description');
+export const profileTitle = document.querySelector('.profile__title');
+export const profileSubtitle = document.querySelector('.profile__subtitle');
 
-//--------------------Готовый массив карточек-------------------
-export const initialCards = [
-  {
-    name: 'Дворы центрального района Санкт-Петербурга',
-    link: 'https://sun9-39.userapi.com/c850616/v850616138/18cc42/kY4hyQouHrA.jpg'
-  },
-  {
-    name: 'Парадная',
-    link: 'https://sun9-23.userapi.com/xn6ZlCyTt_22GJ0rE-LzJXJ-tSWyd88t3vP2ww/z9prKXIdawc.jpg'
-  },
-  {
-    name: 'Вид с крыш',
-    link: 'https://i01.fotocdn.net/s129/464ab7c2080e10ca/public_pin_l/2917810206.jpg'
-  },
-  {
-    name: 'Двор-Колодец',
-    link: 'https://pro-dachnikov.com/uploads/posts/2021-10/1633327441_23-p-dom-stena-v-sankt-peterburge-vnutri-foto-26.jpg'
-  },
-  {
-    name: 'Набережная',
-    link: 'http://rasfokus.ru/images/photos/medium/55a7a8e067e55120ee8f962547932a8c.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://travelask.ru/system/images/files/000/322/386/wysiwyg/fR0Kajg5gM0.jpg?1500040314'
-  }
-];

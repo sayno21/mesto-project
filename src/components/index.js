@@ -1,55 +1,23 @@
 import '../index.css';
-import {popupTypeProfile, popupTypeNewcard, popupTypeZoom, elementContainer, imageTitle, imageLink, newCard, popupTypeAvatar, avatarLink, avatarImage, avatarForm, buttonSaverNewCard, buttonSaverProfile, buttonSaverAvatar} from './constants';
+import {popupTypeProfile, popupTypeNewcard, popupTypeZoom, imageTitle, imageLink, newCard, popupTypeAvatar, avatarLink, avatarImage, avatarForm, buttonSaverNewCard, buttonSaverProfile, buttonSaverAvatar, formTypeProfile, firstname, description, profileTitle, profileSubtitle} from './constants';
 import {enableValidation} from './validate';
 import {closePopupOverlay, openPopup, closePopup} from './modal';
-import {addCards} from './card';
-import {getProfileInfo, loadCardsFromServer, sendNewCard, sendProfileInfo, loadNewAvatar} from './api';
-
-
-//Редактирование профиля
-export const formTypeProfile = document.querySelector('.form_type_profile');
-export const firstname = document.querySelector('.form__text_type_firstmane');
-export const description = document.querySelector('.form__text_type_description');
-export const profileTitle = document.querySelector('.profile__title');
-export const profileSubtitle = document.querySelector('.profile__subtitle');
-
-
-//Вызов закрытие попапов кликом на оверлей
-closePopupOverlay(popupTypeProfile);
-closePopupOverlay(popupTypeNewcard);
-closePopupOverlay(popupTypeZoom);
-closePopupOverlay(popupTypeAvatar);
-
-//слушатель редактирования формы профиля
-formTypeProfile.addEventListener('submit', editProfileForm);
-
-//Вызов валидации форм
-enableValidation ();
-
-
-//Открытие маодального окна с разными карточками
-const zoomImage = document.querySelector('.popup__zoom-image');
-const zoomImageTitle = document.querySelector('.popup__zoom-title');
-export function openPopupTypeZoom(title, image) {
-  zoomImage.src = image;
-  zoomImage.alt = title;
-  zoomImageTitle.textContent = title;
-  openPopup(popupTypeZoom);
-}
+import {addCards, likeCard, elementContainer} from './card';
+import {getProfileInfo, loadCardsFromServer, sendNewCard, sendProfileInfo, loadNewAvatar, addCardLike, deleteCardLike, deleteCardFromServer} from './api';
 
 //Загружаем актуальные данные профиля
 function renderResult(title, text) {
   title.textContent = text;
-}
+};
 
 function renderError(title, err) {
   title.textContent = err;
-}
+};
 
 function renderAvatar(text) {
   const avatar = document.querySelector('.profile__image');
   avatar.src = text;
-}
+};
 
 getProfileInfo()
 .then((res) => {
@@ -62,21 +30,6 @@ getProfileInfo()
   renderError(profileTitle, `Ошибка: ${err}`);
   renderError(profileSubtitle, `Ошибка: ${err}`);
 });
-
-//Получаем актуальные карточки с сервера
-function addCardsFromArray(element) {
-  element.forEach(function (item) {
-    const card = addCards(item.name, item.link);
-    elementContainer.prepend(card);
-  });
-}
-
-
-loadCardsFromServer()
-  .then((res) => {
-    addCardsFromArray(res);
-  })
-
 
 //Отображаем обновленные данные пользователя
 function editProfileForm (evt) {
@@ -93,21 +46,54 @@ function editProfileForm (evt) {
       renderAvatar(res.avatar);
       closePopup (popupTypeProfile);
     })
+};
 
-}
+formTypeProfile.addEventListener('submit', editProfileForm);
+
+//Вызов закрытие попапов кликом на оверлей
+closePopupOverlay(popupTypeProfile);
+closePopupOverlay(popupTypeNewcard);
+closePopupOverlay(popupTypeZoom);
+closePopupOverlay(popupTypeAvatar);
+
+//Вызов валидации форм
+enableValidation ();
+
+//Открытие маодального окна с разными карточками
+const zoomImage = document.querySelector('.popup__zoom-image');
+const zoomImageTitle = document.querySelector('.popup__zoom-title');
+export function openPopupTypeZoom(title, image) {
+  zoomImage.src = image;
+  zoomImage.alt = title;
+  zoomImageTitle.textContent = title;
+  openPopup(popupTypeZoom);
+};
+
+//Получаем актуальные данные с сервера
+const profile = document.querySelector('.profile');
+Promise.all([getProfileInfo(), loadCardsFromServer()])
+  .then(([userID, cards]) => {
+    profile.id = userID._id;
+    cards.forEach((card) => {
+      const elementCard = addCards(card, profile);
+      elementContainer.append(elementCard);
+    })
+  });
 
 //Добавляем новую карточку
-function addNewElement (evt) {
+export function addNewElement (evt) {
   evt.preventDefault();
-  buttonSaverNewCard.textContent = 'Сохраняем...'
-  const cardData = {
-    name: imageTitle.value,
-    link: imageLink.value
-  }
-  sendNewCard(cardData);
-  elementContainer.prepend(addCards(imageTitle.value, imageLink.value));
-  closePopup(popupTypeNewcard);
-}
+  sendNewCard(imageTitle.value, imageLink.value)
+    .then((card) => {
+      buttonSaverNewCard.textContent = 'Сохраняем...';
+      elementContainer.prepend(addCards(card, profile));
+      closePopup(popupTypeNewcard);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+};
+
 newCard.addEventListener('submit', addNewElement);
 
 
@@ -121,9 +107,37 @@ function submitNewAvatar(evt) {
       avatarForm.reset();
       closePopup(popupTypeAvatar);
     })
-}
+  };
+
 avatarForm.addEventListener('submit', submitNewAvatar);
 
-//Отображаем количество лайков карточки
-//const likeCounter = document.querySelector('.element__like-counter');
+//Функция добавления лайка
+export function addLikeHandler(elementCard, card, profile) {
+    addCardLike(card._id)
+      .then((card) => {
+        likeCard(elementCard, card.likes, profile);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
+//Функция удаления лайка
+export function deleteLikeHandler(elementCard, card, profile) {
+    deleteCardLike(card._id)
+      .then((card) => {
+        likeCard(elementCard, card.likes, profile);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+//Функция удаления карточки
+export function deleteCardHandler(element) {
+    deleteCardFromServer(element.id)
+      .then(() => element.remove())
+      .catch((err) => {
+        console.log(err);
+      });
+  }

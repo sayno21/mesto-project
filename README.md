@@ -6,4 +6,4 @@
 Сайт отлично отображается на основных разрешениях экрана (от мобильного телефона до декстопа).  
 Интерактивные элементы сделаны с помощью JS.
 
-* [Ссылка на GitHub Pages](https://sayno21.github.io/mesto-project/)
+* [Ссылка на GitHub Pages](https://sayno21.github.io/mesto-project/index.html)

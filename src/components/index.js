@@ -1,35 +1,42 @@
 import '../index.css';
-import {popupTypeProfile, popupTypeNewcard, popupTypeZoom, imageTitle, imageLink, newCard, popupTypeAvatar, avatarLink, avatarImage, avatarForm, buttonSaverNewCard, buttonSaverProfile, buttonSaverAvatar, formTypeProfile, firstname, description, profileTitle, profileSubtitle} from './constants';
-import {enableValidation} from './validate';
+import {
+  popupTypeProfile,
+  popupTypeNewcard,
+  popupTypeZoom,
+  imageTitle,
+  imageLink,
+  newCard,
+  popupTypeAvatar,
+  avatarLink,
+  avatarImage,
+  avatarForm,
+  buttonSaverNewCard,
+  buttonSaverProfile,
+  buttonSaverAvatar,
+  formTypeProfile,
+  firstname,
+  description,
+  profileTitle,
+  profileSubtitle,
+  profileEditButton,
+  profileAddButton,
+  profileAvatarButton} from './constants';
+import {enableValidation, stayButtonDidabled, settings} from './validate';
 import {closePopupOverlay, openPopup, closePopup} from './modal';
-import {addCards, likeCard, elementContainer} from './card';
-import {getProfileInfo, loadCardsFromServer, sendNewCard, sendProfileInfo, loadNewAvatar, addCardLike, deleteCardLike, deleteCardFromServer} from './api';
+import {createCard, elementContainer} from './card';
+import {getProfileInfo, loadCardsFromServer, sendNewCard, sendProfileInfo, loadNewAvatar} from './api';
 
 //Загружаем актуальные данные профиля
 function renderResult(title, text) {
   title.textContent = text;
 };
 
-function renderError(title, err) {
-  title.textContent = err;
-};
 
 function renderAvatar(text) {
   const avatar = document.querySelector('.profile__image');
   avatar.src = text;
 };
 
-getProfileInfo()
-.then((res) => {
-  renderResult(profileTitle, res.name);
-  renderResult(profileSubtitle, res.about);
-  renderAvatar(res.avatar);
-})
-.catch((err) => {
-  console.log(`Ошибка: ${err}`);
-  renderError(profileTitle, `Ошибка: ${err}`);
-  renderError(profileSubtitle, `Ошибка: ${err}`);
-});
 
 //Отображаем обновленные данные пользователя
 function editProfileForm (evt) {
@@ -44,8 +51,15 @@ function editProfileForm (evt) {
       renderResult(profileTitle, res.name);
       renderResult(profileSubtitle, res.about);
       renderAvatar(res.avatar);
-      closePopup (popupTypeProfile);
+
     })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      buttonSaverProfile.textContent = "Сохранить";
+    });
+    closePopup (popupTypeProfile);
 };
 
 formTypeProfile.addEventListener('submit', editProfileForm);
@@ -57,17 +71,9 @@ closePopupOverlay(popupTypeZoom);
 closePopupOverlay(popupTypeAvatar);
 
 //Вызов валидации форм
-enableValidation ();
+enableValidation (settings);
 
-//Открытие маодального окна с разными карточками
-const zoomImage = document.querySelector('.popup__zoom-image');
-const zoomImageTitle = document.querySelector('.popup__zoom-title');
-export function openPopupTypeZoom(title, image) {
-  zoomImage.src = image;
-  zoomImage.alt = title;
-  zoomImageTitle.textContent = title;
-  openPopup(popupTypeZoom);
-};
+
 
 //Получаем актуальные данные с сервера
 const profile = document.querySelector('.profile');
@@ -75,23 +81,35 @@ Promise.all([getProfileInfo(), loadCardsFromServer()])
   .then(([userID, cards]) => {
     profile.id = userID._id;
     cards.forEach((card) => {
-      const elementCard = addCards(card, profile);
+      const elementCard = createCard(card, profile);
       elementContainer.append(elementCard);
+    })
+    getProfileInfo()
+    .then((res) => {
+      renderResult(profileTitle, res.name);
+      renderResult(profileSubtitle, res.about);
+      renderAvatar(res.avatar);
+    })
+    .catch((err) => {
+      console.log(err);
     })
   });
 
 //Добавляем новую карточку
 export function addNewElement (evt) {
   evt.preventDefault();
+  buttonSaverNewCard.textContent = 'Сохраняем...';
   sendNewCard(imageTitle.value, imageLink.value)
     .then((card) => {
-      buttonSaverNewCard.textContent = 'Сохраняем...';
-      elementContainer.prepend(addCards(card, profile));
-      closePopup(popupTypeNewcard);
+      elementContainer.prepend(createCard(card, profile));
     })
     .catch((err) => {
       console.log(err);
     })
+    .finally(() => {
+      buttonSaverNewCard.textContent = "Сохранить";
+    });
+    closePopup(popupTypeNewcard);
 };
 
 newCard.addEventListener('submit', addNewElement);
@@ -100,44 +118,34 @@ newCard.addEventListener('submit', addNewElement);
 //Добавляем новый аватар
 function submitNewAvatar(evt) {
   evt.preventDefault();
+  buttonSaverAvatar.textContent = 'Сохраняем...'
   loadNewAvatar(avatarLink.value)
     .then((res) => {
       avatarImage.src = res.avatar;
-      buttonSaverAvatar.textContent = 'Сохраняем...'
       avatarForm.reset();
-      closePopup(popupTypeAvatar);
     })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      buttonSaverAvatar.textContent = "Сохранить";
+    });
+    closePopup(popupTypeAvatar);
   };
 
 avatarForm.addEventListener('submit', submitNewAvatar);
 
-//Функция добавления лайка
-export function addLikeHandler(elementCard, card, profile) {
-    addCardLike(card._id)
-      .then((card) => {
-        likeCard(elementCard, card.likes, profile);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
 
-//Функция удаления лайка
-export function deleteLikeHandler(elementCard, card, profile) {
-    deleteCardLike(card._id)
-      .then((card) => {
-        likeCard(elementCard, card.likes, profile);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
+//Слушатели попапов
+profileEditButton.addEventListener('click', function() {
+  openPopup(popupTypeProfile)
+});
 
-//Функция удаления карточки
-export function deleteCardHandler(element) {
-    deleteCardFromServer(element.id)
-      .then(() => element.remove())
-      .catch((err) => {
-        console.log(err);
-      });
-  }
+profileAddButton.addEventListener('click', function() {
+  openPopup(popupTypeNewcard);
+  newCard.reset();stayButtonDidabled();
+});
+
+profileAvatarButton.addEventListener('click', function() {
+  openPopup(popupTypeAvatar);
+})

@@ -1,6 +1,6 @@
 import {popupTypeNewcard} from './constants';
 //----------------Валидация форм---------------
-const settings = {
+export const settings = {
   formSelector: '.form',
   inputSelector: '.form__text',
   submitButtonSelector: '.form__button',
@@ -84,5 +84,3 @@ export const  stayButtonDidabled = () => {
   saveButton.classList.add(settings.inactiveButtonClass);
   saveButton.setAttribute('disabled', true);
 }
-
-

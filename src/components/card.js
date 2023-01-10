@@ -1,5 +1,5 @@
-import {openPopupTypeZoom, addLikeHandler, deleteLikeHandler, deleteCardHandler} from './index';
-
+import {openPopupTypeZoom} from './modal'
+import {addLikeHandler, deleteCardHandler, deleteLikeHandler} from './utilits';
 
 export const elementContainer = document.querySelector('.elements__container');
 export const elementTemplate = document.querySelector('#element').content;
@@ -23,7 +23,7 @@ export function likeCard(element, likeCount, userID) {
 }
 
 //функция отображения карточки
-export function addCards(item, userID) {
+export function createCard(item, userID) {
   const userCard = elementTemplate.querySelector('.element').cloneNode(true);
   const likeButton = userCard.querySelector('.element__button');
   const cardImage = userCard.querySelector('.element__image');

@@ -16,4 +16,7 @@ export const firstname = document.querySelector('.form__text_type_firstmane');
 export const description = document.querySelector('.form__text_type_description');
 export const profileTitle = document.querySelector('.profile__title');
 export const profileSubtitle = document.querySelector('.profile__subtitle');
+export const profileEditButton = document.querySelector('.profile__edit-button');
+export const profileAddButton = document.querySelector('.profile__add-button');
+export const profileAvatarButton = document.querySelector('.profile__avatar-button');
 

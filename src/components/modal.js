@@ -1,4 +1,4 @@
-import {popupTypeProfile, popupTypeNewcard, popupTypeZoom, newCard, popupTypeAvatar} from './constants';
+import {popupTypeZoom} from './constants';
 
 //---------------Открытие/Закрытие модальных окон---------------
 const closeButtonProfile = document.querySelector('.close-button_profile');
@@ -25,10 +25,7 @@ export function closePopup(popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', listenEscape);
 };
-closeButtonProfile.addEventListener('click', function(){closePopup(popupTypeProfile)});
-closeButtonNewcard.addEventListener('click', function(){closePopup(popupTypeNewcard)});
-closeButtonZoom.addEventListener('click', function(){closePopup(popupTypeZoom)});
-closeButtonAvatar.addEventListener('click', function(){closePopup(popupTypeAvatar)});
+
 
 
 

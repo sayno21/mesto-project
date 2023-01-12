@@ -20,7 +20,11 @@ import {
   profileSubtitle,
   profileEditButton,
   profileAddButton,
-  profileAvatarButton} from './constants';
+  profileAvatarButton,
+  closeButtonProfile,
+  closeButtonNewcard,
+  closeButtonZoom,
+  closeButtonAvatar} from './constants';
 import {enableValidation, stayButtonDidabled, settings} from './validate';
 import {closePopupOverlay, openPopup, closePopup} from './modal';
 import {createCard, elementContainer} from './card';
@@ -51,7 +55,7 @@ function editProfileForm (evt) {
       renderResult(profileTitle, res.name);
       renderResult(profileSubtitle, res.about);
       renderAvatar(res.avatar);
-
+      closePopup (popupTypeProfile);
     })
     .catch((err) => {
       console.log(err);
@@ -59,7 +63,6 @@ function editProfileForm (evt) {
     .finally(() => {
       buttonSaverProfile.textContent = "Сохранить";
     });
-    closePopup (popupTypeProfile);
 };
 
 formTypeProfile.addEventListener('submit', editProfileForm);
@@ -70,6 +73,12 @@ closePopupOverlay(popupTypeNewcard);
 closePopupOverlay(popupTypeZoom);
 closePopupOverlay(popupTypeAvatar);
 
+//Закрытие попапов кликом на кнопку
+closeButtonProfile.addEventListener('click', function(){closePopup(popupTypeProfile)});
+closeButtonNewcard.addEventListener('click', function(){closePopup(popupTypeNewcard)});
+closeButtonZoom.addEventListener('click', function(){closePopup(popupTypeZoom)});
+closeButtonAvatar.addEventListener('click', function(){closePopup(popupTypeAvatar)});
+
 //Вызов валидации форм
 enableValidation (settings);
 
@@ -78,17 +87,14 @@ enableValidation (settings);
 //Получаем актуальные данные с сервера
 const profile = document.querySelector('.profile');
 Promise.all([getProfileInfo(), loadCardsFromServer()])
-  .then(([userID, cards]) => {
-    profile.id = userID._id;
+  .then(([userInfo, cards]) => {
+    profile.id = userInfo._id;
     cards.forEach((card) => {
       const elementCard = createCard(card, profile);
       elementContainer.append(elementCard);
-    })
-    getProfileInfo()
-    .then((res) => {
-      renderResult(profileTitle, res.name);
-      renderResult(profileSubtitle, res.about);
-      renderAvatar(res.avatar);
+      renderResult(profileTitle, userInfo.name);
+      renderResult(profileSubtitle, userInfo.about);
+      renderAvatar(userInfo.avatar);
     })
     .catch((err) => {
       console.log(err);
@@ -102,6 +108,7 @@ export function addNewElement (evt) {
   sendNewCard(imageTitle.value, imageLink.value)
     .then((card) => {
       elementContainer.prepend(createCard(card, profile));
+      closePopup(popupTypeNewcard);
     })
     .catch((err) => {
       console.log(err);
@@ -109,7 +116,7 @@ export function addNewElement (evt) {
     .finally(() => {
       buttonSaverNewCard.textContent = "Сохранить";
     });
-    closePopup(popupTypeNewcard);
+
 };
 
 newCard.addEventListener('submit', addNewElement);
@@ -123,6 +130,7 @@ function submitNewAvatar(evt) {
     .then((res) => {
       avatarImage.src = res.avatar;
       avatarForm.reset();
+      closePopup(popupTypeAvatar);
     })
     .catch((err) => {
       console.log(err);
@@ -130,7 +138,6 @@ function submitNewAvatar(evt) {
     .finally(() => {
       buttonSaverAvatar.textContent = "Сохранить";
     });
-    closePopup(popupTypeAvatar);
   };
 
 avatarForm.addEventListener('submit', submitNewAvatar);

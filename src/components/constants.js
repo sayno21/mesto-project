@@ -19,4 +19,8 @@ export const profileSubtitle = document.querySelector('.profile__subtitle');
 export const profileEditButton = document.querySelector('.profile__edit-button');
 export const profileAddButton = document.querySelector('.profile__add-button');
 export const profileAvatarButton = document.querySelector('.profile__avatar-button');
+export const closeButtonProfile = document.querySelector('.close-button_profile');
+export const closeButtonNewcard = document.querySelector('.close-button_new-card');
+export const closeButtonZoom = document.querySelector('.popup__close-button_zoom-image');
+export const closeButtonAvatar = document.querySelector('.popup__close-button_avatar');
 
